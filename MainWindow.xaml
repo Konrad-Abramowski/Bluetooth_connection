@@ -1,0 +1,71 @@
+﻿<Window x:Class="Bluetooth.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Bluetooth"
+        mc:Ignorable="d"
+        Title="Bluetooth" Height="450" Width="800" Background="Gray">
+    <Grid>
+        <Label Width="120"
+               Height="25"
+               Margin="15,0,0,334"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Bottom"
+               Content="Wybierz adapter" />
+        <ComboBox x:Name="comboBoxBluetoothAdapters"
+                  Width="265"
+                  Height="25"
+                  Margin="155,0,0,334"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Bottom"
+                  DisplayMemberPath="Name"
+                  ItemsSource="{Binding BluetoothAdapters}"
+                  SelectedItem="{Binding CurrentAdapter}"/>
+        <Button Width="265"
+                Height="25"
+                Margin="155,0,0,374"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Click="UpdateAdaptersBtn_Click"
+                Content="Odśwież adaptery" />
+        <Button Width="265"
+                Height="25"
+                Margin="155,0,0,294"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Click="SearchForDevicesBtn_Click"
+                Content="Wyszukaj urządzenia Bluetooth" />
+        <Button Width="265"
+                Height="25"
+                Margin="155,0,0,134"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Click="PairDeviceBtn_Click"
+                Content="Sparuj urządzenie" />
+        <ListBox x:Name="listBoxBluetoothDevices"
+                  Width="265"
+                  Height="110"
+                  Margin="154,0,0,169"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Bottom"               
+                  ItemsSource="{Binding BluetoothDevices}"
+                  SelectedItem="{Binding ChosenDevice}" >
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <TextBlock Text="{Binding Path=DeviceName, StringFormat= 'Nazwa urządzenia: \{0\} '}"/>
+                        <TextBlock Text="{Binding Path=DeviceAddress, StringFormat= 'Adres MAC: \{0\} '}"/>
+                        <TextBlock Text="{Binding Path=Rssi, StringFormat= 'Rssi: \{0\} '}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Label Width="120"
+            Height="25"
+            Margin="15,0,0,254"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Content="Wybierz urządzenie" />
+    </Grid>
+</Window>
